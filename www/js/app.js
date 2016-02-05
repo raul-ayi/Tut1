@@ -2,7 +2,7 @@
 +	Module:		ionicApp
 **************************************************/
 
-angular.module('ionicApp', ['ionic','ionicApp.Main','ionicApp.Page2', 'ionicApp.Page3'])
+angular.module('ionicApp', ['ionic','ionicApp.Main','ionicApp.UserList', 'ionicApp.Page3'])
 
 .config(function($urlRouterProvider) {
   // Default route for the whole app
@@ -33,20 +33,20 @@ angular.module('ionicApp.Main', ['ionic'])
 
 
 /**************************************************
-+	Module:		ionicApp.Page2
++	Module:		ionicApp.UserList
 +	Exports:
 +		userService
 +		Page2Ctrl
 **************************************************/
 
-angular.module('ionicApp.Page2', ['ionic'])
+angular.module('ionicApp.UserList', ['ionic'])
 
 .config(function($stateProvider, $urlRouterProvider) {
   $stateProvider
-  .state('page2', {
-    url: '/page2',
-    templateUrl: 'templates/page2.html',
-    controller: 'Page2Ctrl'
+  .state('UserList', {
+    url: '/UserList',
+    templateUrl: 'templates/UserList.html',
+    controller: 'UserListCtrl'
   })
 })
 
@@ -60,7 +60,7 @@ angular.module('ionicApp.Page2', ['ionic'])
   }
 })
 
-.controller("Page2Ctrl", function($scope, userService) {
+.controller("UserListCtrl", function($scope, userService) {
   userService.getUsers().then(function(users){
     $scope.users = users;
   });
@@ -69,7 +69,8 @@ angular.module('ionicApp.Page2', ['ionic'])
 
 /**************************************************
 +	Module:		ionicApp.Page3
-
++	Exports:
++		Page3Ctrl
 **************************************************/
 
 angular.module('ionicApp.Page3', ['ionic'])
