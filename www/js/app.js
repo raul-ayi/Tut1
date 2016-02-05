@@ -47,15 +47,27 @@ angular.module('ionicApp.UserList', ['ionic'])
     url: '/UserList',
     templateUrl: 'templates/UserList.html',
     controller: 'UserListCtrl'
-  })
+        })
+        .state('UserListDetail', {
+          url: '/UserListDetail/:index',
+          templateUrl: 'templates/UserListDetail.html',
+          controller: "UserListDetailCtrl"
+        })
+
 })
 
 .factory('userService', function($http) {
+  var users = [];
+
   return {
     getUsers: function() {
       return $http.get('http://randomuser.me/api/?results=10').then (function(response) {
+        users = response.data.results; // populate the variable
         return response.data.results;
       });
+    },
+    getUser: function(index) {
+      return users[index];
     }
   }
 })
@@ -63,7 +75,12 @@ angular.module('ionicApp.UserList', ['ionic'])
 .controller("UserListCtrl", function($scope, userService) {
   userService.getUsers().then(function(users){
     $scope.users = users;
-  });
+  })
+})
+
+.controller("UserListDetailCtrl", function($scope, $stateParams, userService) {
+  var index = $stateParams.index;
+  $scope.item = userService.getUser(index);
 });
 
 

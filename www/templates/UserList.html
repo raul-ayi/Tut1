@@ -1,12 +1,12 @@
 <ion-header-bar class="bar-stable">
-  <h1 class="title">Page 2!</h1>
+  <h1 class="title">User List</h1>
 </ion-header-bar>
-<ion-content class="padding">
-  <p>I am Page 2!</p><a href="#/main">Back to main page!</a>
+<ion-content>
+    <a class="padding" href="#/main">Back to main page!</a>
   <br>
   <br>
   <ion-list>
-    <ion-item class="item-avatar" ng-repeat="item in users">
+    <ion-item class="item-avatar" ng-repeat="item in users" ui-sref='UserListDetail({index: $index})'>
       <img src="{{item.user.picture.thumbnail}}" />
       <h2>{{item.user.name.first}} {{item.user.name.last}}</h2>
       <p>{{item.user.location.city}} {{item.user.password}}</p>
