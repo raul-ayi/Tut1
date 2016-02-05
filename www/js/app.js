@@ -24,6 +24,22 @@ angular.module('ionicApp', ['ionic'])
   });
 })
 
+.factory('userService', function($http) {
+  return {
+    getUsers: function() {
+      return $http.get('https://randomuser.me/api/?results=10').then(function(response) {
+        return response.data.results;
+      });
+    }
+  }
+})
+
+.controller("Page2Ctrl", function($scope, userService) {
+  userService.getUsers().then(function(users) {
+    $scope.users = users;
+  });
+
+})
 
 .controller("MainCtrl", function() {
   console.log("Main Controller says: Hello World!");
@@ -40,14 +56,15 @@ angular.module('ionicApp', ['ionic'])
 
   .state('page2', {
     url: '/page2',
-    templateUrl: 'templates/page2.html'
+    templateUrl: 'templates/page2.html',
+    controller: 'Page2Ctrl'
   })
 
   .state('page3', {
     url: '/page3',
     templateUrl: 'templates/page3.html'
   })
-
+// if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/main');
 
 });
