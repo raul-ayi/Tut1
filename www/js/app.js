@@ -2,7 +2,7 @@
 +	Module:		ionicApp
 **************************************************/
 
-angular.module('ionicApp', ['ionic','ionicApp.Main','ionicApp.Page2'])
+angular.module('ionicApp', ['ionic','ionicApp.Main','ionicApp.Page2', 'ionicApp.Page3'])
 
 .config(function($urlRouterProvider) {
   // Default route for the whole app
@@ -64,4 +64,25 @@ angular.module('ionicApp.Page2', ['ionic'])
   userService.getUsers().then(function(users){
     $scope.users = users;
   });
+});
+
+
+/**************************************************
++	Module:		ionicApp.Page3
+
+**************************************************/
+
+angular.module('ionicApp.Page3', ['ionic'])
+
+.config(function($stateProvider, $urlRouterProvider) {
+  $stateProvider
+  .state('page3', {
+    url: '/page3',
+    templateUrl: 'templates/page3.html',
+    controller: 'Page3Ctrl'
+  });
+})
+
+.controller("Page3Ctrl", function() {
+  console.log("Main Controller says: Hello World from Page 3 Controller");
 });
